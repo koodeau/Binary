@@ -10,7 +10,7 @@ public class Library {
     static Map<String, String> Binary = new HashMap<>();
 
     public void PutCodes(){
-        Binary.put(" ", " ");
+/*        Binary.put(" ", " ");
 
         Binary.put("A", "01000001 ");
         Binary.put("B", "01000010 ");
@@ -94,7 +94,10 @@ public class Library {
         Binary.put("(", "00101000 ");
         Binary.put(")", "00101001 ");
         Binary.put("*", "00101010 ");
-        Binary.put("+", "00101011 ");
+        Binary.put("+", "00101011 ");   */
+
+
+        
 
     }
 

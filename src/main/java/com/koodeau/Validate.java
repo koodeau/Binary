@@ -1,19 +1,19 @@
 package com.koodeau;
-import com.koodeau.Library;
 import javax.swing.*;
+import com.koodeau.App;
 
 public class Validate extends Library {
 
-    public Validate(){}
+    Validate(){}
 
     public static String Text = new String("");
-    public static String Code = new String("");
-    public static Integer i;
+    public static StringBuilder Code = new StringBuilder();
 
-    public static void Input(){
+    static void Input(){
         Text = JOptionPane.showInputDialog(null,"Input text (Max 255 symbols) to translate into Binary Code:");
-        while (Text.length()>255){
-            Text = JOptionPane.showInputDialog(null,"Input text (Max 255 symbols) to translate into Binary Code:");
+        if (Text.length()>255){
+            Text = JOptionPane.showInputDialog(null,"Input less text (Max 255 symbols) to translate into Binary Code:");
+            System.out.println("[WARNING] "+App.currentTime + ": String 'Text' is bigger than 255 symbols! {Validate}");
         }
         System.out.println("User input: "+Text);
     }
@@ -21,6 +21,13 @@ public class Validate extends Library {
 
     public void Check(){
 
+        if (Text.isBlank()){
+            System.out.println("[WARNING] "+App.currentTime + ": Input is blank. Try again. {Validate}");
+            JOptionPane.showMessageDialog(null, "Your Input cannot be blank. Please, input something to translate it.", "Error", JOptionPane.ERROR_MESSAGE);
+            Validate.Input();
+        }
+
+/*
         if (Text.contains("A")){Code += Binary.get("A");}
         if (Text.contains("B")){Code += Binary.get("B");}
         if (Text.contains("C")){Code += Binary.get("C");}
@@ -104,13 +111,37 @@ public class Validate extends Library {
         if (Text.contains("+")){Code += Binary.get("+");}
         if (Text.contains("_")){Code += Binary.get("_");}
         if (Text.contains("$")){Code += Binary.get("$");}
+*/
+    }
+
+    public void Translate(){
+
+
+
+        byte[] bytes = Text.getBytes(); System.out.println("[INFO] "+App.currentTime + ": Text.getBytes(); {Validate}");
+        
+
+		for (byte b : bytes){
+            int val = b;
+            
+			for (int i = 0; i < 8; i++){
+				Code.append((val & 128) == 0 ? 0 : 1);
+				val <<= 1;
+            }
+            
+			Code.append(' '); System.out.println("[INFO] "+App.currentTime + ": Code.append(); {Validate}");
+        }
+        
+        System.out.println("'" + Text + "' to binary: " + Code);
+
+
     }
 
     public static void main(String[] args) {
-        Library Codes = new Library();
         Validate Validate = new Validate();
-        Codes.PutCodes();
-        Validate.Check();
+//        Codes.PutCodes();
+        Validate.Check(); System.out.println("[INFO] "+App.currentTime + ": Check() void from class {Validate} started!");    
+        Validate.Translate(); System.out.println("[INFO] "+App.currentTime + ": Translate() void from class {Validate} started!");
 
         System.out.println("Binary: "+Code);
         JOptionPane.showMessageDialog(null, "Inputed text : "+Text+"\nTranslation to Binary Code :\n"+Code, "Binary", JOptionPane.INFORMATION_MESSAGE);
