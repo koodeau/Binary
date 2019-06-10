@@ -13,7 +13,7 @@ public class Manager {
   try {
    task.start();
    task.progress();
-   task.compleate();
+   task.complete();
    return true;
   } catch(Exception e) {
    logger.error("Unknown error", e);

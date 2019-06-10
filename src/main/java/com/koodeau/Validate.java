@@ -21,8 +21,8 @@ public class Validate extends Library {
 
     public void Check(){
 
-        if (Text.isBlank()){
-            System.out.println("[WARNING] "+App.currentTime + ": Input is blank. Try again. {Validate}");
+        if (Text.isEmpty()){
+            System.out.println("[WARNING] "+App.currentTime + ": Input is blank or empty. Try again. {Validate}");
             JOptionPane.showMessageDialog(null, "Your Input cannot be blank. Please, input something to translate it.", "Error", JOptionPane.ERROR_MESSAGE);
             Validate.Input();
         }
